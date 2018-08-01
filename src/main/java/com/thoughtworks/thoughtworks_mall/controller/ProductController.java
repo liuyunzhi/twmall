@@ -30,4 +30,14 @@ public class ProductController {
         productService.update(id, product);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity get(@PathVariable Long id) {
+        Product product = productService.get(id);
+        if (product == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(product);
+    }
 }
