@@ -24,4 +24,10 @@ public class ProductController {
         productService.remove(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity update(@PathVariable Long id, @RequestBody Product product) {
+        productService.update(id, product);
+        return ResponseEntity.noContent().build();
+    }
 }
