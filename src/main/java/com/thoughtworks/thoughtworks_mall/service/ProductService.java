@@ -5,6 +5,7 @@ import com.thoughtworks.thoughtworks_mall.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -38,5 +39,9 @@ public class ProductService {
 
     public Product get(Long id) {
         return productRepository.findById(id).orElse(null);
+    }
+
+    public List<Product> getAll(Double minPrice, Double maxPrice, String brand, String category, Integer page, Integer pageSize, String order) {
+        return productRepository.filter(minPrice, maxPrice, brand, category, page, pageSize, order);
     }
 }

@@ -40,4 +40,15 @@ public class ProductController {
 
         return ResponseEntity.ok(product);
     }
+
+    @GetMapping
+    public ResponseEntity getAll(@RequestParam(value = "minPrice", required = false) Double minPrice,
+                                 @RequestParam(value = "maxPrice", required = false) Double maxPrice,
+                                 @RequestParam(value = "brand", required = false) String brand,
+                                 @RequestParam(value = "category", required = false) String category,
+                                 @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
+                                 @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize,
+                                 @RequestParam(value = "order", required = false, defaultValue = "ASC") String order) {
+        return ResponseEntity.ok(productService.getAll(minPrice, maxPrice, brand, category, page, pageSize, order));
+    }
 }
