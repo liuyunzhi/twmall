@@ -5,8 +5,6 @@ import com.thoughtworks.thoughtworks_mall.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class OrderService {
 
@@ -23,5 +21,9 @@ public class OrderService {
             order.setTotalPrice(totalPrice);
         }
         return order;
+    }
+
+    public Order add(Order order) {
+        return orderRepository.save(order);
     }
 }

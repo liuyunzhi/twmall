@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/orders")
@@ -19,5 +18,11 @@ public class OrderController {
     @GetMapping("/{id}")
     public ResponseEntity<Order> get(@PathVariable Long id) {
         return ResponseEntity.ok(orderService.get(id));
+    }
+
+    @PostMapping
+    public ResponseEntity add(@RequestBody Order order) {
+        Order newOrder = orderService.add(order);
+        return ResponseEntity.created(URI.create("/" + newOrder.getId())).build();
     }
 }
