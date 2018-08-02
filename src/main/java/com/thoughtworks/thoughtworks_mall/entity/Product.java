@@ -12,8 +12,10 @@ public class Product {
     private Long id;
     private String name;
     private Double price;
+    private String unit;
     private String category;
     private String brand;
+    private String image;
     private String description;
     @Column(name = "production_date")
     private Date productionDate;
@@ -82,5 +84,21 @@ public class Product {
 
     public void setProductionPlace(String productionPlace) {
         this.productionPlace = productionPlace;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

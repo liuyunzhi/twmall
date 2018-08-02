@@ -28,8 +28,10 @@ public class ProductService {
             Product oldProduct = optional.get();
             oldProduct.setName(product.getName());
             oldProduct.setPrice(product.getPrice());
+            oldProduct.setUnit(product.getUnit());
             oldProduct.setCategory(product.getCategory());
             oldProduct.setBrand(product.getBrand());
+            oldProduct.setImage(product.getImage());
             oldProduct.setDescription(product.getDescription());
             oldProduct.setProductionDate(product.getProductionDate());
             oldProduct.setProductionPlace(product.getProductionPlace());
