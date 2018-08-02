@@ -1,0 +1,7 @@
+CREATE TABLE `order_item` (
+  `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+  `product_id` BIGINT(20) NOT NULL,
+  `order_id` BIGINT(20)NOT NULL,
+  `count` INT(10)NOT NULL,
+  PRIMARY KEY(`id`)
+)ENGINE = InnoDB DEFAULT CHARSET = utf8;
