@@ -1,9 +1,12 @@
 package com.thoughtworks.thoughtworks_mall.controller;
 
 import com.thoughtworks.thoughtworks_mall.entity.Product;
+import com.thoughtworks.thoughtworks_mall.exception.ProductNotFoundException;
 import com.thoughtworks.thoughtworks_mall.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,7 +29,7 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity update(@PathVariable Long id, @RequestBody Product product) {
+    public ResponseEntity update(@PathVariable Long id, @RequestBody Product product) throws ProductNotFoundException {
         productService.update(id, product);
         return ResponseEntity.noContent().build();
     }
@@ -50,5 +53,11 @@ public class ProductController {
                                  @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize,
                                  @RequestParam(value = "order", required = false, defaultValue = "ASC") String order) {
         return ResponseEntity.ok(productService.getAll(minPrice, maxPrice, brand, category, page, pageSize, order));
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    private void productNotFoundHandle(ProductNotFoundException ex){
+
     }
 }

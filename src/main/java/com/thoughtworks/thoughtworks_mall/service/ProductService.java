@@ -1,6 +1,7 @@
 package com.thoughtworks.thoughtworks_mall.service;
 
 import com.thoughtworks.thoughtworks_mall.entity.Product;
+import com.thoughtworks.thoughtworks_mall.exception.ProductNotFoundException;
 import com.thoughtworks.thoughtworks_mall.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,10 +23,11 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    public void update(Long id, Product product) {
-        Optional<Product> optional = productRepository.findById(id);
-        if (optional.isPresent()) {
-            Product oldProduct = optional.get();
+    public void update(Long id, Product product) throws ProductNotFoundException {
+        Product oldProduct = productRepository.findById(id)
+                .orElseThrow(()->new ProductNotFoundException());
+
+
             oldProduct.setName(product.getName());
             oldProduct.setPrice(product.getPrice());
             oldProduct.setUnit(product.getUnit());
@@ -36,7 +38,6 @@ public class ProductService {
             oldProduct.setProductionDate(product.getProductionDate());
             oldProduct.setProductionPlace(product.getProductionPlace());
             productRepository.save(oldProduct);
-        }
     }
 
     public Product get(Long id) {
