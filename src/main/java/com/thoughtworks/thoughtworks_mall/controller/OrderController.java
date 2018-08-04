@@ -1,5 +1,6 @@
 package com.thoughtworks.thoughtworks_mall.controller;
 
+import com.thoughtworks.thoughtworks_mall.controller.request.OrderRequest;
 import com.thoughtworks.thoughtworks_mall.entity.Order;
 import com.thoughtworks.thoughtworks_mall.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,14 @@ public class OrderController {
     }
 
     @PostMapping
-    public ResponseEntity add(@RequestBody Order order) {
-        Order newOrder = orderService.add(order);
+    public ResponseEntity add(@RequestBody OrderRequest orderRequest) {
+        Order newOrder = orderService.add(orderRequest);
         return ResponseEntity.created(URI.create("/" + newOrder.getId())).build();
+    }
+
+    @PostMapping("/{id}/orderItems")
+    public ResponseEntity addProductTo(@PathVariable Long id, @RequestParam Long productId) {
+        orderService.addProductTo(id, productId);
+        return ResponseEntity.created(URI.create("/" + id + "/orderItems/")).build();
     }
 }
